@@ -19,9 +19,9 @@
   /* Full-width Top Banner */
   .top-banner {
     width: 100%;
-    background: linear-gradient(90deg, #f3f5f8 0%, #dfe7f2 50%, #c8d6e8 100%);
-    border-bottom: 1px solid #b5c5da;
-    padding: 8px 10px;
+    background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 55%, #dbe4f0 100%);
+    border-bottom: 1px solid #cbd5e1;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,56 +29,50 @@
   .brand-left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     min-width: 0;
   }
-  .emblem {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 1.5px solid #9ca3af;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 9px;
-    color: #8b1e24;
+  .rop-crest {
+    width: 46px;
+    height: 48px;
     flex-shrink: 0;
-    box-shadow: inset 0 0 0 2px #1b365d;
   }
   .brand-titles {
-    line-height: 1.2;
+    line-height: 1.15;
     min-width: 0;
   }
   .brand-ar {
-    font-size: 12px;
+    font-family: "Traditional Arabic", "Amiri", "Times New Roman", serif;
+    font-size: 20px;
     font-weight: 700;
-    color: #1b365d;
+    color: #111827;
+    letter-spacing: 0.3px;
     white-space: nowrap;
   }
   .brand-en {
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #1b365d;
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+    color: #1f2937;
     text-transform: uppercase;
+    margin-top: 2px;
     white-space: nowrap;
   }
   .brand-right {
     text-align: right;
     line-height: 1.2;
     flex-shrink: 0;
-    padding-left: 6px;
+    padding-left: 8px;
   }
   .brand-right-top {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: #1b365d;
     white-space: nowrap;
   }
   .brand-right-sub {
-    font-size: 8.5px;
+    font-size: 9px;
     font-weight: 700;
     color: #2e4a85;
     white-space: nowrap;
@@ -87,28 +81,34 @@
   /* Full-width Navigation Bar */
   .nav-bar {
     width: 100%;
-    background: #2f5597;
+    background: #3b5998;
     color: #ffffff;
     padding: 7px 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 9.5px;
-    gap: 6px;
+    font-size: 10px;
+    gap: 8px;
     overflow-x: auto;
     white-space: nowrap;
   }
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+  }
+  .home-icon {
+    width: 13px;
+    height: 13px;
+    fill: #ffffff;
+    vertical-align: middle;
   }
   .nav-links span.active {
     font-weight: 700;
   }
   .nav-login {
     font-weight: 700;
-    font-size: 9.5px;
+    font-size: 10px;
     flex-shrink: 0;
   }
 
@@ -192,7 +192,7 @@
     right: 2px;
     top: 52%;
     height: 2.5px;
-    background: #dc2626;
+    background: #111827;
     transform: rotate(-5deg);
   }
   .submit-row {
@@ -216,9 +216,6 @@
     font-size: 11px;
     font-weight: 700;
     cursor: pointer;
-  }
-  .btn-search:hover:not(:disabled) {
-    background: #234175;
   }
   .btn-search:disabled {
     opacity: 0.65;
@@ -255,7 +252,6 @@
     font-weight: 700;
     color: #15803d;
   }
-
   .error-box {
     margin-top: 12px;
     padding: 8px 10px;
@@ -306,9 +302,24 @@
 
 <div class="top-banner">
   <div class="brand-left">
-    <div class="emblem">ROP</div>
+    <!-- Official-style Crest SVG -->
+    <svg class="rop-crest" viewBox="0 0 100 105" xmlns="http://www.w3.org/2000/svg">
+      <!-- Red Crown at top -->
+      <path d="M38 18 L42 10 L50 14 L58 10 L62 18 Z" fill="#c81e1e" stroke="#7f1d1d" stroke-width="1.5"/>
+      <rect x="37" y="18" width="26" height="4" rx="1" fill="#d97706"/>
+      <!-- Wreath branches -->
+      <path d="M35 24 C16 32, 14 62, 32 76" fill="none" stroke="#9ca3af" stroke-width="5" stroke-dasharray="4 2"/>
+      <path d="M65 24 C84 32, 86 62, 68 76" fill="none" stroke="#9ca3af" stroke-width="5" stroke-dasharray="4 2"/>
+      <!-- Inner ring & crossed swords/khanjar -->
+      <circle cx="50" cy="50" r="20" fill="#f8fafc" stroke="#6b7280" stroke-width="2"/>
+      <line x1="38" y1="38" x2="62" y2="62" stroke="#4b5563" stroke-width="2.5"/>
+      <line x1="62" y1="38" x2="38" y2="62" stroke="#4b5563" stroke-width="2.5"/>
+      <path d="M47 40 L53 40 L51 60 L49 60 Z" fill="#9ca3af"/>
+      <!-- Blue bottom ribbon -->
+      <path d="M18 76 Q50 92 82 76 L78 86 Q50 100 22 86 Z" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="1.2"/>
+    </svg>
     <div class="brand-titles">
-      <div class="brand-ar">شرطة عمان السلطانية</div>
+      <div class="brand-ar">شُرْطَة عُمَان السُّلْطَانِيَّة</div>
       <div class="brand-en">ROYAL OMAN POLICE</div>
     </div>
   </div>
@@ -320,6 +331,7 @@
 
 <div class="nav-bar">
   <div class="nav-links">
+    <svg class="home-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     <span>Know your Visa Type</span>
     <span>|</span>
     <span class="active">Track Your Application</span>
@@ -337,16 +349,16 @@
   <h1 class="page-title">Track Your Application</h1>
 
   <div class="form-box">
-    <form id="appTrackForm">
+    <form id="appTrackForm" autocomplete="off">
       <div class="form-grid">
         <div class="input-card">
           <label for="visaAppNo">Visa Application Number <span class="req">(*)</span></label>
-          <input type="text" id="visaAppNo" autocomplete="off" required>
+          <input type="text" id="visaAppNo" value="" autocomplete="off" required>
         </div>
 
         <div class="input-card">
           <label for="nationalitySel">Document's Nationality <span class="req">(*)</span></label>
-          <select id="nationalitySel" required>
+          <select id="nationalitySel" autocomplete="off" required>
             <option value="" selected disabled></option>
             <option value="ETHIOPIA">ETHIOPIA</option>
           </select>
@@ -354,7 +366,7 @@
 
         <div class="input-card">
           <label for="travelDocNo">Travel Document Number <span class="req">(*)</span></label>
-          <input type="text" id="travelDocNo" autocomplete="off" required>
+          <input type="text" id="travelDocNo" value="" autocomplete="off" required>
         </div>
 
         <div class="input-card">
@@ -362,7 +374,7 @@
             <div class="captcha-box">2255</div>
           </div>
           <label for="captchaField">Text Verification <span class="req">(*)</span></label>
-          <input type="text" id="captchaField" autocomplete="off" required>
+          <input type="text" id="captchaField" value="" autocomplete="off" required>
         </div>
       </div>
 
@@ -413,6 +425,10 @@
 </div>
 
 <script>
+  window.addEventListener("pageshow", function() {
+    document.getElementById("appTrackForm").reset();
+  });
+
   document.getElementById("appTrackForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
