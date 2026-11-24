@@ -5,48 +5,289 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Track Your Application</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 20px; }
-  .box { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-  h2 { color: #1b365d; margin-bottom: 15px; }
-  label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
-  input, select { width: 100%; padding: 9px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-  button { width: 100%; padding: 11px; margin-top: 18px; background: #1b365d; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
-  #res { margin-top: 15px; padding: 12px; border-radius: 4px; display: none; font-weight: bold; text-align: center; }
-  .ok { background: #d4edda; color: #155724; }
-  .no { background: #f8d7da; color: #721c24; }
+  * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+  body {
+    margin: 0;
+    background: #eef1f5;
+    color: #222;
+    padding-bottom: 40px;
+  }
+  .top-bar {
+    background: #2e4a85;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: right;
+  }
+  .page-wrap {
+    max-width: 520px;
+    margin: 18px auto;
+    background: #fff;
+    padding: 20px 18px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  h2 {
+    margin: 0 0 16px 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+  .form-panel {
+    background: #e6e8ec;
+    padding: 14px;
+    border-radius: 4px;
+  }
+  .field-box {
+    background: #f5f6f8;
+    border: 1px solid #d5d8de;
+    border-radius: 3px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 5px;
+  }
+  label span.req {
+    color: #d92d20;
+  }
+  input[type="text"], select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cfd4dc;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 14px;
+    color: #111;
+  }
+  .captcha-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+  }
+  .captcha-box {
+    background: repeating-linear-gradient(
+      45deg,
+      #d1d5db,
+      #d1d5db 4px,
+      #9ca3af 4px,
+      #9ca3af 8px
+    );
+    border: 1px solid #6b7280;
+    padding: 6px 14px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #111;
+    position: relative;
+    user-select: none;
+  }
+  .captcha-box::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 3px;
+    background: #dc2626;
+    transform: rotate(-4deg);
+  }
+  .btn-row {
+    margin-top: 12px;
+    text-align: right;
+  }
+  button {
+    background: #2e4a85;
+    color: #fff;
+    border: none;
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #223866;
+  }
+  #result-area {
+    margin-top: 22px;
+    display: none;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: #fff;
+  }
+  th {
+    background: #eef3fa;
+    color: #2e4a85;
+    font-weight: 700;
+    padding: 8px 6px;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+    line-height: 1.25;
+  }
+  td {
+    padding: 9px 6px;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+    color: #111;
+    vertical-align: middle;
+  }
+  .status-approved {
+    font-weight: 700;
+    color: #111;
+  }
+  .doc-icon {
+    display: inline-block;
+    width: 16px;
+    height: 20px;
+    border: 1.5px solid #dc2626;
+    border-radius: 2px;
+    position: relative;
+    background: #fff5f5;
+  }
+  .doc-icon::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    right: 3px;
+    height: 2px;
+    background: #dc2626;
+    box-shadow: 0 4px 0 #dc2626, 0 8px 0 #dc2626;
+  }
+  .err-msg {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 700;
+    display: none;
+  }
+  .bottom-pattern {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 18px;
+    background: repeating-linear-gradient(
+      90deg,
+      #1e3a8a 0px,
+      #1e3a8a 12px,
+      #93c5fd 12px,
+      #93c5fd 24px,
+      #1d4ed8 24px,
+      #1d4ed8 36px,
+      #dbeafe 36px,
+      #dbeafe 48px
+    );
+    opacity: 0.75;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
-<div class="box">
+
+<div class="top-bar">العربية</div>
+
+<div class="page-wrap">
   <h2>Track Your Application</h2>
-  <form id="f">
-    <label>Visa Application Number (*)</label>
-    <input type="text" id="a" required>
-    <label>Travel Document Number (*)</label>
-    <input type="text" id="p" required>
-    <label>Document's Nationality (*)</label>
-    <select><option>ETHIOPIA</option></select>
-    <label>Text Verification (*): <b>6866</b></label>
-    <input type="text" id="c" required>
-    <button type="submit">Search</button>
-  </form>
-  <div id="res"></div>
+
+  <div class="form-panel">
+    <form id="visaForm">
+      <div class="field-box">
+        <label>Visa Application Number <span class="req">(*)</span></label>
+        <input type="text" id="appNum" placeholder="100066707335" required>
+      </div>
+
+      <div class="field-box">
+        <label>Travel Document Number <span class="req">(*)</span></label>
+        <input type="text" id="docNum" placeholder="E00865368" required>
+      </div>
+
+      <div class="field-box">
+        <label>Document's Nationality <span class="req">(*)</span></label>
+        <select id="nat">
+          <option value="ETHIOPIA" selected>ETHIOPIA</option>
+        </select>
+      </div>
+
+      <div class="field-box">
+        <div class="captcha-row">
+          <div class="captcha-box">6866</div>
+        </div>
+        <label>Text Verification <span class="req">(*)</span></label>
+        <input type="text" id="capVal" required>
+      </div>
+
+      <div class="btn-row">
+        <button type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="errBox" class="err-msg">No record found for the entered details.</div>
+
+  <div id="result-area">
+    <table>
+      <thead>
+        <tr>
+          <th>Visa<br>Application<br>Number</th>
+          <th>Travel<br>Document<br>Nationality</th>
+          <th>Travel<br>Document<br>Number</th>
+          <th>Status</th>
+          <th>Pay<br>Rec</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="outApp"></td>
+          <td id="outNat"></td>
+          <td id="outDoc"></td>
+          <td class="status-approved">Approved</td>
+          <td><span class="doc-icon" title="Receipt"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<div class="bottom-pattern"></div>
+
 <script>
-  document.getElementById("f").addEventListener("submit", function(e) {
+  document.getElementById("visaForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    var app = document.getElementById("a").value.trim();
-    var pas = document.getElementById("p").value.trim();
-    var r = document.getElementById("res");
-    r.style.display = "block";
-    if (app === "100066707335" && pas === "E00865368") {
-      r.className = "ok";
-      r.textContent = "Status: Approved ✅";
+    const appInput = document.getElementById("appNum").value.trim();
+    const docInput = document.getElementById("docNum").value.trim().toUpperCase();
+    const natInput = document.getElementById("nat").value;
+    const capInput = document.getElementById("capVal").value.trim();
+
+    const resultArea = document.getElementById("result-area");
+    const errBox = document.getElementById("errBox");
+
+    if (appInput === "100066707335" && docInput === "E00865368" && capInput === "6866") {
+      errBox.style.display = "none";
+      document.getElementById("outApp").textContent = appInput;
+      document.getElementById("outNat").textContent = natInput;
+      document.getElementById("outDoc").textContent = docInput;
+      resultArea.style.display = "block";
     } else {
-      r.className = "no";
-      r.textContent = "Not Found / Invalid Details";
+      resultArea.style.display = "none";
+      errBox.style.display = "block";
     }
   });
 </script>
+
 </body>
 </html>
