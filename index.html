@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Your Application</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 20px; }
+  .box { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  h2 { color: #1b365d; margin-bottom: 15px; }
+  label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
+  input, select { width: 100%; padding: 9px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+  button { width: 100%; padding: 11px; margin-top: 18px; background: #1b365d; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+  #res { margin-top: 15px; padding: 12px; border-radius: 4px; display: none; font-weight: bold; text-align: center; }
+  .ok { background: #d4edda; color: #155724; }
+  .no { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+<body>
+<div class="box">
+  <h2>Track Your Application</h2>
+  <form id="f">
+    <label>Visa Application Number (*)</label>
+    <input type="text" id="a" required>
+    <label>Travel Document Number (*)</label>
+    <input type="text" id="p" required>
+    <label>Document's Nationality (*)</label>
+    <select><option>ETHIOPIA</option></select>
+    <label>Text Verification (*): <b>6866</b></label>
+    <input type="text" id="c" required>
+    <button type="submit">Search</button>
+  </form>
+  <div id="res"></div>
+</div>
+<script>
+  document.getElementById("f").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var app = document.getElementById("a").value.trim();
+    var pas = document.getElementById("p").value.trim();
+    var r = document.getElementById("res");
+    r.style.display = "block";
+    if (app === "100066707335" && pas === "E00865368") {
+      r.className = "ok";
+      r.textContent = "Status: Approved ✅";
+    } else {
+      r.className = "no";
+      r.textContent = "Not Found / Invalid Details";
+    }
+  });
+</script>
+</body>
+</html>
